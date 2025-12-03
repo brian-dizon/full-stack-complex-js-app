@@ -1,0 +1,26 @@
+{
+  "name": "full-stack-complex-js-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "watch": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brian-dizon/full-stack-complex-js-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brian-dizon/full-stack-complex-js-app/issues"
+  },
+  "homepage": "https://github.com/brian-dizon/full-stack-complex-js-app#readme",
+  "description": "",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
