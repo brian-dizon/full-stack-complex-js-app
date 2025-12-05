@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 exports.login = (req,res)=> {
 
 }
@@ -7,7 +9,9 @@ exports.logout = (req,res)=> {
 }
 
 exports.register = (req,res)=> {
-    res.send('You tried to register.')
+    let user = new User();
+    user.register();
+    res.send('You tried to register.');
 }
 
 exports.home = (req,res)=> {
