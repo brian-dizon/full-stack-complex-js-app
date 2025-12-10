@@ -1,7 +1,12 @@
 const User = require('../models/User');
 
 exports.login = (req, res) => {
+    let user = new User(req.body);
 
+    // Using a (traditional) callback function to handle async login
+    user.login(function (result) {
+        res.send(result);
+    });
 }
 
 exports.logout = (req, res) => {
