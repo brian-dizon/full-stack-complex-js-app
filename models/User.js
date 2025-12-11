@@ -30,21 +30,16 @@ User.prototype.validate = function () {
     if (this.data.username.length > 30) this.errors.push('Username cannot exceed 30 characters.');
 }
 
-User.prototype.login = async function (callback) {
-    // Clean up data
-    this.cleanUp();
-
-    // Attempt to find user in database
-    const attemptedUser = await usersCollection.findOne({ username: this.data.username, password: this.data.password });
-
-    // Validate data
-    if (attemptedUser && attemptedUser.password == this.data.password) {
-        // console.log('You are logged in!');
-        callback('You are logged in!');
-    } else {
-        // console.log('Invalid username / password.');
-        callback('Invalid username / password.');
-    }
+User.prototype.login = function () {
+    return new Promise(async (resolve, reject) => {
+        this.cleanUp();
+        const attemptedUser = await usersCollection.findOne({ username: this.data.username });
+        if (attemptedUser && attemptedUser.password == this.data.password) {
+            resolve('Congrats!');
+        } else {
+            reject('Invalid username/password.');
+        }
+    });
 }
 
 User.prototype.register = function () {
