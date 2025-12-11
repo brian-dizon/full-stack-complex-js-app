@@ -3,18 +3,10 @@ const User = require('../models/User');
 exports.login = (req, res) => {
     let user = new User(req.body);
 
-    // Using a (traditional) callback function to handle async login
-    // user.login(function (result) {
-    //     res.send(result);
-    // });
-
-    // user.login().then(function (result) {
-    //     res.send(result);
-    // }).catch(function (err) {
-    //     res.send(err);
-    // });
-
-    user.login().then(result => res.send(result)).catch(err => res.send(err));
+    user.login().then(result => {
+        req.session.user = { username: user.data.username, _id: user.data._id };
+        res.send(result);
+    }).catch(err => res.send(err));
 
 }
 
@@ -34,5 +26,9 @@ exports.register = (req, res) => {
 }
 
 exports.home = (req, res) => {
-    res.render('home-guest')
+    if (req.session.user) {
+        res.send('Welcome to the actual dashboard, ' + req.session.user.username);
+    } else {
+        res.render('home-guest');
+    }
 }
