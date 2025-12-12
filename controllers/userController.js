@@ -5,13 +5,13 @@ exports.login = (req, res) => {
 
     user.login().then(result => {
         req.session.user = { username: user.data.username, _id: user.data._id };
-        res.send(result);
+        req.session.save(function () { res.redirect('/') });
     }).catch(err => res.send(err));
 
 }
 
 exports.logout = (req, res) => {
-
+    req.session.destroy(() => res.redirect('/'));
 }
 
 exports.register = (req, res) => {
