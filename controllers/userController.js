@@ -6,7 +6,10 @@ exports.login = (req, res) => {
     user.login().then(result => {
         req.session.user = { username: user.data.username, _id: user.data._id };
         req.session.save(function () { res.redirect('/') });
-    }).catch(err => res.send(err));
+    }).catch(err => {
+        req.flash('errors', err);
+        req.session.save(() => res.redirect('/'));
+    });
 
 }
 
@@ -29,6 +32,6 @@ exports.home = (req, res) => {
     if (req.session.user) {
         res.render('home-dashboard', { username: req.session.user.username });
     } else {
-        res.render('home-guest');
+        res.render('home-guest', { errors: req.flash('errors') });
     }
 }
