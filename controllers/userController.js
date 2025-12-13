@@ -7,9 +7,7 @@ exports.login = (req, res) => {
     .login()
     .then((result) => {
       req.session.user = { avatar: user.avatar, username: user.data.username, _id: user.data._id };
-      req.session.save(function () {
-        res.redirect("/");
-      });
+      req.session.save(() => res.redirect("/"));
     })
     .catch((err) => {
       req.flash("errors", err);
