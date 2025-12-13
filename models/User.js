@@ -79,7 +79,7 @@ User.prototype.register = function () {
       // Hash user password
       let salt = bcrypt.genSaltSync(10);
       this.data.password = bcrypt.hashSync(this.data.password, salt);
-      usersCollection.insertOne(this.data);
+      await usersCollection.insertOne(this.data);
       this.getAvatar();
       resolve();
     } else {
