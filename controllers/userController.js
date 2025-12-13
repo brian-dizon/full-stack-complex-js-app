@@ -26,7 +26,7 @@ exports.register = (req, res) => {
   user
     .register()
     .then(() => {
-      req.session.user = { avatar: user.avatar, username: user.data.username };
+      req.session.user = { avatar: user.avatar, username: user.data.username, _id: user.data._id };
       req.session.save(() => res.redirect("/"));
     })
     .catch((registrationErrors) => {
